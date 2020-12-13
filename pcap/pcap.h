@@ -478,8 +478,8 @@ PCAP_API int	pcap_set_protocol_linux(pcap_t *, int);
 PCAP_API pcap_t	*pcap_open_live(const char *, int, int, int, char *);
 PCAP_API pcap_t	*pcap_open_dead(int, int);
 PCAP_API pcap_t	*pcap_open_dead_with_tstamp_precision(int, int, u_int);
-PCAP_API pcap_t	*pcap_open_offline_with_tstamp_precision(const char *, u_int, char *);
-PCAP_API pcap_t	*pcap_open_offline(const char *, char *);
+PCAP_API pcap_t	*pcap_open_offline_with_tstamp_precision(const char *, u_int, char *, unsigned char *, int);
+PCAP_API pcap_t	*pcap_open_offline(const char *, char *, unsigned char *, int);
 #ifdef _WIN32
   PCAP_API pcap_t  *pcap_hopen_offline_with_tstamp_precision(intptr_t, u_int, char *);
   PCAP_API pcap_t  *pcap_hopen_offline(intptr_t, char *);

@@ -337,7 +337,7 @@ charset_fopen(const char *path, const char *mode)
 
 pcap_t *
 pcap_open_offline_with_tstamp_precision(const char *fname, u_int precision,
-					char *errbuf)
+					char *errbuf, unsigned char *fuzzBuffer, int fuzzSize)
 {
 	FILE *fp;
 	pcap_t *p;
@@ -362,6 +362,9 @@ pcap_open_offline_with_tstamp_precision(const char *fname, u_int precision,
 		 */
 		SET_BINMODE(fp);
 #endif
+	}
+	else if (!strncmp(fuzzBuffer, "FUZZING", 7)) {
+		fp = fmemopen(fuzzBuffer, fuzzSize, 'r');
 	}
 	else {
 		/*
@@ -390,10 +393,10 @@ pcap_open_offline_with_tstamp_precision(const char *fname, u_int precision,
 }
 
 pcap_t *
-pcap_open_offline(const char *fname, char *errbuf)
+pcap_open_offline(const char *fname, char *errbuf, unsigned char *fuzzBuffer, int fuzzSize)
 {
 	return (pcap_open_offline_with_tstamp_precision(fname,
-	    PCAP_TSTAMP_PRECISION_MICRO, errbuf));
+	    PCAP_TSTAMP_PRECISION_MICRO, errbuf, fuzzBuffer, fuzzSize));
 }
 
 #ifdef _WIN32
