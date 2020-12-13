@@ -363,7 +363,7 @@ pcap_open_offline_with_tstamp_precision(const char *fname, u_int precision,
 		SET_BINMODE(fp);
 #endif
 	}
-	else if (!strncmp(fuzzBuffer, "FUZZING", 7)) {
+	else if (!strncmp(fname, "FUZZING", 7)) {
 		fp = fmemopen(fuzzBuffer, fuzzSize, "r");
 	}
 	else {
